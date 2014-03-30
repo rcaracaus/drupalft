@@ -24,12 +24,12 @@ angular
 
             $routeProvider
                 .when("/", {
-                    templateUrl: "/templates/index.html",
+                    templateUrl: "/partials/partial1.html",
                     routeName: "index",
                     controller: 'nodeCtrl'
-                }).when("/asdf", {
+                }).when("/node/:nodeID", {
                     templateUrl: "/partials/partial1.html",
-                    controller: 'nodeCtrl'
+                    controller: 'nodesCtrl'
                 })
                 // Add further routes here
             ;
@@ -75,8 +75,10 @@ angular.module('myApp.directives', []).
 
 angular.module('dft.controllers', []).
   controller('nodeCtrl', function ($scope, $http) {
-    
      $scope.test = "testString";
      console.log($scope);
-
+  }).
+  controller('nodesCtrl', function ($scope, $http) {
+     $scope.test = "nodesString";
+     console.log($scope);
   });
