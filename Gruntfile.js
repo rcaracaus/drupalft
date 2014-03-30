@@ -146,8 +146,6 @@ module.exports = function (grunt) {
         "jscs",
         "build"
     ]);
-
-
     grunt.registerTask("build:internal", [
         "clean:build",
         "concat",
@@ -157,8 +155,7 @@ module.exports = function (grunt) {
 
     grunt.registerTask("build", [
         "build:internal",
-        "uglify",
-        "sails-linker:live"
+        "sails-linker:dev"
     ]);
 
     grunt.registerTask("build:dev", [
