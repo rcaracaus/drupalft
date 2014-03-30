@@ -1,4 +1,5 @@
-angular
+
+var dft = angular
 
     .module("dft", [
         "ngRoute",
@@ -27,8 +28,9 @@ angular
                     templateUrl: "/partials/partial1.html",
                     routeName: "index",
                     controller: 'nodeCtrl'
-                }).when("/node/:nodeID", {
-                    templateUrl: "/partials/partial1.html",
+                })
+                .when('/node/:id', {
+                    templateUrl: '/partials/partial2.html', 
                     controller: 'nodesCtrl'
                 })
                 // Add further routes here
@@ -36,6 +38,7 @@ angular
         }
     ])
 ;
+
 
 'use strict';
 
@@ -78,7 +81,6 @@ angular.module('dft.controllers', []).
      $scope.test = "testString";
      console.log($scope);
   }).
-  controller('nodesCtrl', function ($scope, $http) {
-     $scope.test = "nodesString";
-     console.log($scope);
+  controller('nodesCtrl', function ($scope, $routeParams, $location) {
+     console.log($routeParams);
   });
