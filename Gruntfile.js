@@ -90,6 +90,12 @@ module.exports = function (grunt) {
                         dest: "build/index.html"
                     },
                     {
+                        src: "lib/partials/*",
+                        dest: "build/partials/",
+                        expand: true,
+                        flatten: true
+                    },
+                    {
                         src: "lib/styles/*",
                         dest: "build/assets/css/",
                         expand: true,
