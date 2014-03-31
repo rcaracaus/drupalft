@@ -33,6 +33,10 @@ var dft = angular
                     templateUrl: '/partials/partial2.html', 
                     controller: 'nodesCtrl'
                 })
+                .when('/frontpage', {
+                    templateUrl: '/partials/frontpage.html', 
+                    controller: 'frontpageCtrl'
+                })
                 // Add further routes here
             ;
         }
@@ -101,11 +105,18 @@ angular.module('dft.controllers', []).
      
   }).
   controller('nodesCtrl', function ($scope, $routeParams, $location, Restangular) {
-     
-     Restangular.one('node', 1).get().then(function(node){
+     Restangular.one('node', $routeParams.id).get().then(function(node){
         $scope.node = node;
-        console.log($scope.node);
+        
       });
-
-     
-  });
+  }).
+  controller('frontpageCtrl', function ($scope, $location, Restangular) {
+     var resource = Restangular.one('api/views', 'frontpage');
+     resource.getList().then(function(frontpage){
+       // Had to do some work with Restangular settings to get it so object was derestangularized
+       // https://github.com/mgonto/restangular#how-can-i-access-the-unrestangularized-element-as-well-as-the-restangularized-one
+       console.log(frontpage);
+       $scope.frontpage = frontpage;
+     });
+  })
+  ;
