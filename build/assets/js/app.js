@@ -37,6 +37,25 @@ var dft = angular
             ;
         }
     ])
+    .config(["RestangularProvider",function(RestangularProvider){
+      	RestangularProvider.setBaseUrl('http://d8contentdev.devcloud.acquia-sites.com/');
+      	RestangularProvider.setDefaultHeaders({'Content-Type': 'application/json'});
+      	
+
+
+        RestangularProvider.setResponseExtractor(function(response) {
+          var newResponse = response;
+          if (angular.isArray(response)) {
+            angular.forEach(newResponse, function(value, key) {
+              newResponse[key].originalElement = angular.copy(value);
+            });
+          } else {
+            newResponse.originalElement = angular.copy(response);
+          }
+
+          return newResponse;
+        });
+      }])
 ;
 
 
@@ -79,8 +98,14 @@ angular.module('myApp.directives', []).
 angular.module('dft.controllers', []).
   controller('nodeCtrl', function ($scope, $http) {
      $scope.test = "testString";
-     console.log($scope);
+     
   }).
-  controller('nodesCtrl', function ($scope, $routeParams, $location) {
-     console.log($routeParams);
+  controller('nodesCtrl', function ($scope, $routeParams, $location, Restangular) {
+     
+     Restangular.one('node', 1).get().then(function(node){
+        $scope.node = node;
+        console.log($scope.node);
+      });
+
+     
   });
