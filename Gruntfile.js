@@ -28,22 +28,6 @@ module.exports = function (grunt) {
                 appRoot: "build/",
                 fileTmpl: "<script src=\"/%s\"></script>"
             },
-            live: {
-                options: {
-                    startTag: "<!-- APP SCRIPTS -->",
-                    endTag: "<!-- APP SCRIPTS END -->"
-                },
-                files: {
-                    "build/index.html": [
-                        "build/vendor/jquery/live/jquery.min.js",
-                        "build/vendor/lodash/live/lodash.min.js",
-                        "build/vendor/angular/live/angular.min.js",
-                        "build/vendor/angular-route/live/angular-route.min.js",
-                        "build/vendor/restangular/live/restangular.min.js",
-                        "build/assets/js/app.min.js"
-                    ]
-                }
-            },
             dev: {
                 options: {
                     startTag: "<!-- APP SCRIPTS -->",
@@ -56,6 +40,7 @@ module.exports = function (grunt) {
                         "build/vendor/angular/dev/angular.js",
                         "build/vendor/angular-route/dev/angular-route.js",
                         "build/vendor/restangular/dev/restangular.js",
+                        "build/vendor/angular-xeditable/dev/xeditable.js",
                         "build/assets/js/app.js"
                     ]
                 }
@@ -115,7 +100,6 @@ module.exports = function (grunt) {
                 options: {
                     targetDir: "./build/vendor",
                     layout: "byComponent",
-                    cleanBowerDir: true
                 }
             }
         },

@@ -4,7 +4,8 @@ var dft = angular
     .module("dft", [
         "ngRoute",
         'dft.controllers',
-        "restangular"
+        "restangular",
+        "xeditable"
     ])
 
     .config([
@@ -27,7 +28,7 @@ var dft = angular
                 .when("/", {
                     templateUrl: "/partials/partial1.html",
                     routeName: "index",
-                    controller: 'nodeCtrl'
+                    controller: 'blockCtrl'
                 })
                 .when('/node/:id', {
                     templateUrl: '/partials/partial2.html', 
@@ -109,6 +110,15 @@ angular.module('dft.controllers', []).
         $scope.node = node;
         
       });
+  }).
+  controller('blockCtrl', function ($scope, $routeParams, $location, Restangular) {
+    Restangular.one('node', 21).get().then(function(node){
+       $scope.node = node;
+       
+       
+     });
+     
+     $scope.editme = "editme";
   }).
   controller('frontpageCtrl', function ($scope, $location, Restangular) {
      var resource = Restangular.one('api/views', 'frontpage');
