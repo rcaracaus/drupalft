@@ -1,8 +1,9 @@
 <!doctype html>
-<html lang="en" data-ng-app="dft">
+<html lang="en" data-ng-app="dft" data-ng-controller="MainCtrl">
     <head>
         <meta charset="utf-8">
-        <title></title>
+        <link type="text/css" rel="stylesheet" media="all" href="/assets/css/styles.css">
+        <title>{{ Page.title() }}</title>
     </head>
     <body>
       <ul>
@@ -10,8 +11,8 @@
         <li><a href="/#/node/1">Node 1</a></li>
         <li><a href="/#/frontpage">Frontpage</a></li>
       </ul>
+      <h1>{{ Page.title() }}</h1>
         <div data-ng-view>
-
             <!-- Angular will load templates in here -->
         </div>
         <!-- APP SCRIPTS -->

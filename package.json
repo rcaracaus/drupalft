@@ -22,5 +22,8 @@
     "logfmt": "^1.1.2",
     "express": "^3.5.1",
     "gzippo": "^0.2.0"
+  },
+  "devDependencies": {
+    "grunt-contrib-sass": "^0.7.3"
   }
 }

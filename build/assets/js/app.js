@@ -1,4 +1,7 @@
 
+
+
+
 var dft = angular
 
     .module("dft", [
@@ -17,18 +20,27 @@ var dft = angular
         function ($routeProvider, $locationProvider, RestangularProvider) {
 
             "use strict";
+            
+                 
 
             $locationProvider.html5Mode(true);
 
             RestangularProvider.setDefaultHttpFields({
                 cache: true
             });
+            
+            
+            
+            RestangularProvider.setBaseUrl('http://d8-content.local/');
+            RestangularProvider.setDefaultHeaders({ 'Accept': 'application/hal+json' });
+            
+            
 
             $routeProvider
                 .when("/", {
                     templateUrl: "/partials/partial1.html",
                     routeName: "index",
-                    controller: 'blockCtrl'
+                    controller: 'indexCtrl'
                 })
                 .when('/node/:id', {
                     templateUrl: '/partials/partial2.html', 
@@ -39,29 +51,20 @@ var dft = angular
                     controller: 'frontpageCtrl'
                 })
                 // Add further routes here
-            ;
+            ;  
         }
     ])
-    .config(["RestangularProvider",function(RestangularProvider){
-      	RestangularProvider.setBaseUrl('http://d8contentdev.devcloud.acquia-sites.com/');
-      	RestangularProvider.setDefaultHeaders({'Content-Type': 'application/json'});
-      	
-
-
-        RestangularProvider.setResponseExtractor(function(response) {
-          var newResponse = response;
-          if (angular.isArray(response)) {
-            angular.forEach(newResponse, function(value, key) {
-              newResponse[key].originalElement = angular.copy(value);
-            });
-          } else {
-            newResponse.originalElement = angular.copy(response);
-          }
-
-          return newResponse;
-        });
-      }])
+    
+    .factory('Page', function(){
+      var title = 'default';
+      return {
+        title: function() { return title; },
+        setTitle: function(newTitle) { title = newTitle; }
+      };
+    });
 ;
+
+
 
 
 'use strict';
@@ -101,9 +104,13 @@ angular.module('myApp.directives', []).
 /* Controllers */
 
 angular.module('dft.controllers', []).
-  controller('nodeCtrl', function ($scope, $http) {
-     $scope.test = "testString";
-     
+  
+  controller('MainCtrl', function ($scope, $http, Page) {
+     $scope.Page = Page;
+  }).
+  controller('indexCtrl', function ($scope, Page) {
+     Page.setTitle('Angular app');
+     $scope.test = 'testing';
   }).
   controller('nodesCtrl', function ($scope, $routeParams, $location, Restangular) {
      Restangular.one('node', $routeParams.id).get().then(function(node){
@@ -111,14 +118,42 @@ angular.module('dft.controllers', []).
         
       });
   }).
-  controller('blockCtrl', function ($scope, $routeParams, $location, Restangular) {
-    Restangular.one('node', 21).get().then(function(node){
-       $scope.node = node;
-       
-       
-     });
+  controller('blockCtrl', function ($scope, $http) {
+  
      
-     $scope.editme = "editme";
+     data = { 
+      "_links":{
+        "type":{
+           "href":"http://d8-content.local/rest/type/node/page"
+         }
+       },
+     "title":[{"value":"This title should data"}]
+     }
+     
+     
+     
+     $http({
+         url: 'http://d8-content.local/node/63',
+         method: "GET",
+         data: data,
+         headers: {
+           'Content-Type':'application/hal+json',
+           'Accept':'application/hal+json'
+           }
+     }).then(function(response) {
+            // Had to hack Drupal Core to get POST response coming back.
+            // Had to hack Drupal again to get image response back.
+            $scope.node = response.data;
+            $scope.node.field_image = response.data._embedded['http://d8-content.local/rest/relation/node/page/field_image'][0].uri[0].value;
+            
+         }, 
+         function(response) { // optional
+             // failed
+         }
+     );
+     
+     
+     
   }).
   controller('frontpageCtrl', function ($scope, $location, Restangular) {
      var resource = Restangular.one('api/views', 'frontpage');

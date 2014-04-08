@@ -20,8 +20,20 @@ module.exports = function (grunt) {
                 "Gruntfile.js"
             ]
         },
+        sass: {                              
+          dist: {                           
+            options: {                       
+              style: 'expanded',
+              compass: true,
+              bundleExec: true
+            },
+            files: {
+              'build/assets/css/styles.css': 'lib/scss/styles.scss'   
+            }
+          }
+        },
         clean: {
-            build: [ "build" ],
+            build: [ "build" ]
         },
         "sails-linker": {
             options: {
@@ -41,6 +53,7 @@ module.exports = function (grunt) {
                         "build/vendor/angular-route/dev/angular-route.js",
                         "build/vendor/restangular/dev/restangular.js",
                         "build/vendor/angular-xeditable/dev/xeditable.js",
+                        "//localhost:35729/build/vendor/livereload/dev/livereload.js",
                         "build/assets/js/app.js"
                     ]
                 }
@@ -104,9 +117,12 @@ module.exports = function (grunt) {
             }
         },
         watch: {
+            options: {
+              livereload: true,
+            },
             app: {
                 files: [
-                    "lib/**/*.{js,html,css}"
+                    "lib/**/*.{js,html,scss}"
                 ],
                 tasks: [
                     "build:dev"
@@ -124,6 +140,7 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks("grunt-express-server");
     grunt.loadNpmTasks("grunt-sails-linker");
     grunt.loadNpmTasks("grunt-bower-task");
+    grunt.loadNpmTasks('grunt-contrib-sass');
 
     grunt.registerTask("default", [
         "jshint",
@@ -132,6 +149,7 @@ module.exports = function (grunt) {
     ]);
     grunt.registerTask("build:internal", [
         "clean:build",
+        "sass",
         "concat",
         "copy",
         "bower:install"
