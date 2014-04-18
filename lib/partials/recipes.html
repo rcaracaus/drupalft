@@ -1,0 +1,11 @@
+<div ng-controller="recipesCtrl">
+  <a href="#" editable-text="node.title[0].value">{{ node.title[0].value || "empty" }}</a>
+  <div>{{ foo }}</div>
+  <img src="{{ node.field_image }}" />
+
+    <ul ng-repeat="recipe in recipes">
+        <a href="/#/node/{{recipe.nid}}"><li>{{recipe.title}}</li></a>
+    </ul>
+
+
+</div>

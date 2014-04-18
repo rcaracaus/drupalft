@@ -53,7 +53,6 @@ module.exports = function (grunt) {
                         "build/vendor/angular-route/dev/angular-route.js",
                         "build/vendor/restangular/dev/restangular.js",
                         "build/vendor/angular-xeditable/dev/xeditable.js",
-                        "//localhost:35729/build/vendor/livereload/dev/livereload.js",
                         "build/assets/js/app.js"
                     ]
                 }
@@ -104,6 +103,12 @@ module.exports = function (grunt) {
                         dest: "build/templates/",
                         expand: true,
                         flatten: true
+                    },
+                    {
+                      src: "lib/assets/images/*",
+                      dest: "build/assets/images/",
+                      expand: true,
+                      flatten: true
                     }
                 ]
             }
@@ -118,7 +123,7 @@ module.exports = function (grunt) {
         },
         watch: {
             options: {
-              livereload: true,
+              livereload: true
             },
             app: {
                 files: [

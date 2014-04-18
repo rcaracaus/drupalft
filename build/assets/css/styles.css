@@ -1,4 +1,33 @@
+.page {
+  max-width: 1200px;
+  margin: auto;
+}
+
+header {
+  overflow: hidden;
+}
+
 body {
-  background: red;
   color: blue;
+}
+
+.logo {
+  width: 100px;
+  float: left;
+}
+
+.mainMenu {
+  float: right;
+  list-style: none;
+  list-style-type: none;
+}
+.mainMenu li {
+  list-style-image: none;
+  list-style-type: none;
+  margin-left: 0;
+}
+.mainMenu, .mainMenu li {
+  margin: 0px;
+  padding: 0px;
+  display: inline;
 }

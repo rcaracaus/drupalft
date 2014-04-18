@@ -2,12 +2,6 @@ source 'https://rubygems.org'
 
 group :development do
 
-  # Required for Capistrano
-  gem 'railsless-deploy'
-  gem 'capistrano'
-  gem 'capistrano-ext'
-  gem 'capistrano-drupal'
-
   # Required for theme development
   gem 'sass'
   gem 'compass'

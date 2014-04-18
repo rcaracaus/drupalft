@@ -1,0 +1,5 @@
+.mainMenu {
+  float: right;
+  @include no-bullets;
+  @include inline-list;
+}
