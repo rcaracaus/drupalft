@@ -7,20 +7,17 @@
     </head>
     <body>
 
-    <div class="page">
+    <header class="center">
+        <img class="logo" src="/assets/images/sombrero.png" />
+        <div class="site-name">The Best Vegan Mexican Recipes</div>
+        <nav class="mainMenu" ng-include="mainMenu"></nav>
+    </header>
 
-        <header>
-            <img class="logo" src="/assets/images/sombrero.png" />
-            <nav class="mainMenu" ng-include="mainMenu"></nav>
-        </header>
-
-
+    <div class="center">
         <h1>{{ Page.title() }}</h1>
-
         <div data-ng-view>
             <!-- Angular will load templates in here -->
         </div>
-
     </div>
     <!-- APP SCRIPTS --><!-- APP SCRIPTS END -->
     <!-- TEST SCRIPTS --><!-- TEST SCRIPTS END -->

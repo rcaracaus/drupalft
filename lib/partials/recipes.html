@@ -1,11 +1,12 @@
-<div ng-controller="recipesCtrl">
-  <a href="#" editable-text="node.title[0].value">{{ node.title[0].value || "empty" }}</a>
-  <div>{{ foo }}</div>
-  <img src="{{ node.field_image }}" />
+<div ng-controller="recipesCtrl" class="recipes">
 
-    <ul ng-repeat="recipe in recipes">
-        <a href="/#/node/{{recipe.nid}}"><li>{{recipe.title}}</li></a>
+    Search: <input ng-model="searchText">
+    <ul ng-repeat="recipe in recipes | filter:searchText">
+        <li class="recipe">
+            <div class="image image--right" ng-bind-html="recipe.field_recipe_image"></div>
+            <a href="/#/node/{{recipe.nid}}">{{recipe.title}}</a>
+            <div ng-bind-html="recipe.body"></div>
+        </li>
     </ul>
-
 
 </div>

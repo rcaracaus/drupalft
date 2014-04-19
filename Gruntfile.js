@@ -53,6 +53,7 @@ module.exports = function (grunt) {
                         "build/vendor/angular-route/dev/angular-route.js",
                         "build/vendor/restangular/dev/restangular.js",
                         "build/vendor/angular-xeditable/dev/xeditable.js",
+                        "build/vendor/angular-sanitize/dev/angular-sanitize.js",
                         "build/assets/js/app.js"
                     ]
                 }
@@ -117,7 +118,7 @@ module.exports = function (grunt) {
             install: {
                 options: {
                     targetDir: "./build/vendor",
-                    layout: "byComponent",
+                    layout: "byComponent"
                 }
             }
         },

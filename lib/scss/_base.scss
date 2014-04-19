@@ -1,0 +1,11 @@
+* { box-sizing: border-box; }
+
+img { max-width: 100%; height: auto; }
+
+body {
+}
+
+ul {
+  @include no-bullets;
+  @include inline-list;
+}
