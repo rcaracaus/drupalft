@@ -4,16 +4,17 @@
         <meta charset="utf-8">
         <link type="text/css" rel="stylesheet" media="all" href="/assets/css/styles.css">
         <title>{{ Page.title() }}</title>
+        <link href='http://fonts.googleapis.com/css?family=Lato:400,700|Belgrano|Chango' rel='stylesheet' type='text/css'>
     </head>
     <body>
 
+    <nav class="mainMenu center" ng-include="mainMenu"></nav>
     <header class="center">
         <img class="logo" src="/assets/images/sombrero.png" />
-        <div class="site-name">The Best Vegan Mexican Recipes</div>
-        <nav class="mainMenu" ng-include="mainMenu"></nav>
+        <div class="site-name">EL VEGANO LOCO</div>
     </header>
 
-    <div class="center">
+    <div class="page center">
         <h1>{{ Page.title() }}</h1>
         <div data-ng-view>
             <!-- Angular will load templates in here -->

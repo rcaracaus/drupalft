@@ -1,0 +1,17 @@
+header {
+  text-align: center;
+}
+
+.site-name {
+  display: inline-block;
+  @include adjust-font-size-to(50px);
+  @include reset-baseline;
+  font-family: $font--logo;
+  padding: .25em .5em;
+  vertical-align: top;
+}
+
+.logo {
+  width: 100px;
+  display: inline-block;
+}

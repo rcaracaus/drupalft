@@ -1,0 +1,13 @@
+.mainMenu {
+  clear: both;
+  text-align: right;
+  padding: .5em;
+  @include adjust-font-size-to(20px);
+  a {
+    text-decoration: none;
+    font-weight: bold;
+  }
+  li {
+    margin: 0 1em;
+  }
+}

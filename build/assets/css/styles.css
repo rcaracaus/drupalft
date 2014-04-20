@@ -404,6 +404,16 @@ header {
   overflow: hidden;
 }
 
+body {
+  background: #f9cc7f;
+  padding: 1em;
+}
+
+.page {
+  background: white;
+  border-radius: 8px;
+}
+
 * {
   box-sizing: border-box;
 }
@@ -428,21 +438,51 @@ ul, ul li {
   display: inline;
 }
 
+body {
+  color: #f15c25;
+  font-family: Lato, sans-serif;
+}
+
+a {
+  color: #013859;
+}
+
+h1, h2, h3, h4, h5 {
+  font-family: Belgrano, serif;
+}
+
+header {
+  text-align: center;
+}
+
 .site-name {
   display: inline-block;
-  font-size: 1.5625em;
-  line-height: 0.96em;
-  padding: 1.5em;
+  font-size: 3.125em;
+  line-height: 1.44em;
+  line-height: 1.5em;
+  font-family: Chango, cursive;
+  padding: .25em .5em;
+  vertical-align: top;
 }
 
 .logo {
   width: 100px;
-  float: left;
+  display: inline-block;
 }
 
 .mainMenu {
-  float: right;
-  padding: 1.5em;
+  clear: both;
+  text-align: right;
+  padding: .5em;
+  font-size: 1.25em;
+  line-height: 1.2em;
+}
+.mainMenu a {
+  text-decoration: none;
+  font-weight: bold;
+}
+.mainMenu li {
+  margin: 0 1em;
 }
 
 .recipe {
