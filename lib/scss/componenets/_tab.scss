@@ -1,0 +1,10 @@
+.tab {
+  background: $color-3;
+  padding: .5em;
+  border-radius: 5px;
+  margin: 0 .25em;
+  &.active {
+    background: darken($color-3, 10%);
+    color: lighten($color-1, 10%);
+  }
+}

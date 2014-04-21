@@ -1,8 +1,13 @@
 <div ng-controller="recipesCtrl" class="recipes">
 
-    Search: <input ng-model="searchText">
-    <ul ng-repeat="recipe in recipes | filter:searchText">
-        <li class="recipe">
+    <div class="filter">
+        Filter Recipes:
+        <a class="tab" ng-repeat-start="category in categories" ng-click="sendCategory(category); select($index);" ng-class="{'active': $index == selected}">{{category.name}}</a>
+        <a ng-repeat-end></a>
+    </div>
+
+    <ul>
+        <li class="recipe" ng-repeat="recipe in recipes | filter:{term_node_tid:searchTermText}">
             <div class="image image--right" ng-bind-html="recipe.field_recipe_image"></div>
             <a href="/#/node/{{recipe.nid}}">{{recipe.title}}</a>
             <div ng-bind-html="recipe.body"></div>

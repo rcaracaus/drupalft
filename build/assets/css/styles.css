@@ -398,6 +398,7 @@ th {
   max-width: 1200px;
   margin: auto;
   padding: 1em;
+  position: relative;
 }
 
 header {
@@ -436,6 +437,10 @@ ul, ul li {
   margin: 0px;
   padding: 0px;
   display: inline;
+}
+
+a {
+  cursor: pointer;
 }
 
 body {
@@ -485,6 +490,12 @@ header {
   margin: 0 1em;
 }
 
+.filter {
+  position: absolute;
+  right: 1em;
+  top: 1em;
+}
+
 .recipe {
   overflow: hidden;
   clear: both;
@@ -494,6 +505,17 @@ header {
 .recipe .image {
   width: 33%;
   height: auto;
+}
+
+.tab {
+  background: #f9cc7f;
+  padding: .5em;
+  border-radius: 5px;
+  margin: 0 .25em;
+}
+.tab.active {
+  background: #f7b94e;
+  color: #02588b;
 }
 
 .image--right {

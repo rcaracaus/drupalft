@@ -50,7 +50,9 @@ var dft = angular
         title: function() { return title; },
         setTitle: function(newTitle) { title = newTitle; }
       };
-    });
+    })
+
+  ;
 ;
 
 
@@ -72,8 +74,7 @@ angular.module('dft.controllers', []).
       });
   }).
   controller('blockCtrl', function ($scope, $http) {
-  
-  
+
       /*
 
      data = { 
@@ -115,6 +116,32 @@ angular.module('dft.controllers', []).
   }).
   controller('recipesCtrl', function ($scope, $location, Restangular, Page) {
     Page.setTitle("Recipes");
+    $scope.categories = [
+      {
+        "name": "tacos"
+      },
+      {
+        "name": "burrito"
+      }
+    ];
+
+    $scope.categories.unshift({
+      "name": "all"
+    });
+
+    $scope.selected = 0;
+    $scope.select= function($index) {
+      $scope.selected = $index;
+    };
+
+    $scope.sendCategory = function(category) {
+      $scope.searchTermText = category.name;
+      if (category.name == 'all') {
+        $scope.searchTermText  = ""
+      }
+    };
+
+
     Restangular.all('recipes').getList().then(function(recipes) {
       console.log(recipes);
        $scope.recipes = recipes;
