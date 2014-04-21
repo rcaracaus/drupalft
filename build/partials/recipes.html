@@ -2,7 +2,7 @@
 
     <div class="filter">
         Filter Recipes:
-        <a class="tab" ng-repeat-start="category in categories" ng-click="sendCategory(category); select($index);" ng-class="{'active': $index == selected}">{{category.name}}</a>
+        <a class="tab" ng-repeat-start="category in categories" ng-click="sendCategory(category); select($index);" ng-class="{'active': $index == selected}">{{category}}</a>
         <a ng-repeat-end></a>
     </div>
 

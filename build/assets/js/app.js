@@ -57,6 +57,25 @@ var dft = angular
 
 
 
+var removeDuplicatesInPlace = function (arr) {
+  var i, j, cur, found;
+  for (i = arr.length - 1; i >= 0; i--) {
+    cur = arr[i];
+    found = false;
+    for (j = i - 1; !found && j >= 0; j--) {
+      if (cur === arr[j]) {
+        if (i !== j) {
+          arr.splice(i, 1);
+        }
+        found = true;
+      }
+    }
+  }
+  return arr;
+};
+
+
+
 
 'use strict';
 
@@ -116,17 +135,18 @@ angular.module('dft.controllers', []).
   }).
   controller('recipesCtrl', function ($scope, $location, Restangular, Page) {
     Page.setTitle("Recipes");
-    $scope.categories = [
-      {
-        "name": "tacos"
-      },
-      {
-        "name": "burrito"
-      }
-    ];
 
-    $scope.categories.unshift({
-      "name": "all"
+
+    Restangular.all('recipes').getList().then(function(recipes) {
+      $scope.recipes = recipes;
+
+      var categories = [];
+      $scope.recipes.forEach(function(recipe) {
+        categories.push(recipe.term_node_tid);
+      });
+      categories = removeDuplicatesInPlace(categories);
+      $scope.categories = categories;
+      $scope.categories.unshift("all");
     });
 
     $scope.selected = 0;
@@ -135,16 +155,12 @@ angular.module('dft.controllers', []).
     };
 
     $scope.sendCategory = function(category) {
-      $scope.searchTermText = category.name;
-      if (category.name == 'all') {
+      $scope.searchTermText = category;
+      if (category == 'all') {
         $scope.searchTermText  = ""
       }
     };
 
 
-    Restangular.all('recipes').getList().then(function(recipes) {
-      console.log(recipes);
-       $scope.recipes = recipes;
-    });
   })
   ;
