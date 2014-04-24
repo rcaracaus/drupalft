@@ -30,15 +30,6 @@ require 'breakpoint'
 require "compass-recipes"
 require 'singularitygs'
 require 'sass-globbing'
-require 'autoprefixer-rails'
-require 'csso'
-
-on_stylesheet_saved do |file|
-  css = File.read(file)
-  File.open(file, 'w') do |io|
-    io << AutoprefixerRails.compile(css)
-  end
-end
 
 # Assuming this theme is in sites/*/themes/THEMENAME, you can add the partials
 # included with a module by uncommenting and modifying one of the lines below:

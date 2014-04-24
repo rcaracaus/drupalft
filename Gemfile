@@ -12,7 +12,6 @@ group :development do
   gem 'sass-globbing'
   gem 'compass-validator'       # So you can `compass validate`.
   gem 'css_parser'              # Helps `compass stats` output statistics.
-  gem 'autoprefixer-rails'
   gem 'csso-rails'
 end
 

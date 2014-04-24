@@ -2,8 +2,6 @@ GEM
   remote: https://rubygems.org/
   specs:
     addressable (2.3.6)
-    autoprefixer-rails (1.1.20140403)
-      execjs
     breakpoint (2.0.7)
       compass (>= 0.12.1)
       sass (>= 3.2.0)
@@ -39,7 +37,6 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  autoprefixer-rails
   breakpoint
   compass
   compass-recipes
