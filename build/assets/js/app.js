@@ -83,9 +83,8 @@ var removeDuplicatesInPlace = function (arr) {
 
 angular.module('dft.controllers', []).
   
-  controller('MainCtrl', function ($scope, $http, Page) {
+  controller('MainCtrl', function ($scope, Page) {
      $scope.Page = Page;
-     $scope.mainMenu = 'partials/main-menu.html';
   }).
   controller('nodesCtrl', function ($scope, $routeParams, $location, Restangular) {
      Restangular.one('node', $routeParams.id).get().then(function(node){
