@@ -161,5 +161,26 @@ angular.module('dft.controllers', []).
     };
 
 
+  }).
+  controller('blocksCtrl', function ($scope, $http) {
+
+    $http({
+      url: 'http://d8contentdev.devcloud.acquia-sites.com/block_list/bartik/featured',
+      method: "GET",
+      headers: {
+        'Content-Type':'application/hal+json',
+        'Accept':'application/hal+json'
+      }
+    }).then(function(response) {
+        $scope.blocks = response.data;
+      }
+    );
+
   })
+
+
+
+
+
+
   ;

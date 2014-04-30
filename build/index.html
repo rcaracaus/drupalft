@@ -15,11 +15,13 @@
         <div class="site-name">EL VEGANO LOCO</div>
     </header>
 
-
     <div class="page center">
         <h1>{{ Page.title() }}</h1>
-        <div data-ng-view>
+        <div class="column--content" data-ng-view>
             <!-- Angular will load templates in here -->
+        </div>
+        <div class="column--sidebar" ng-controller="blocksCtrl">
+            <div class="block" ng-repeat="block in blocks" ng-bind-html="block.body[0]['#markup']"></div>
         </div>
     </div>
     <!-- APP SCRIPTS -->

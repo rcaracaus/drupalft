@@ -9,14 +9,10 @@ $font--logo: Chango, cursive;
 $font--header: Belgrano, serif;
 $font--body: Lato, sans-serif;
 
-body {
-  background:$color-3;
-  padding: 1em;
-}
-
-.page {
+.column--content, .column--sidebar {
   background: white;
   border-radius: 8px;
+  padding: 1em;
 }
 
 * { box-sizing: border-box; }

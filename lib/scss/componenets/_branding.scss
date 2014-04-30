@@ -2,6 +2,11 @@ header {
   text-align: center;
 }
 
+body {
+  background:white;
+  padding: 1em;
+}
+
 .site-name {
   display: inline-block;
   @include adjust-font-size-to(50px);
@@ -14,4 +19,5 @@ header {
 .logo {
   width: 100px;
   display: inline-block;
+  display: none;
 }

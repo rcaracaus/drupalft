@@ -8,3 +8,18 @@
 header {
   overflow: hidden;
 }
+
+.page {
+  overflow: hidden;
+}
+
+.column--content {
+  float: left;
+  width: 75%;
+  margin-right: 1em;
+}
+
+.column--sidebar {
+  float: right;
+  width: calc(25% - 1em);
+}

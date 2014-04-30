@@ -405,14 +405,25 @@ header {
   overflow: hidden;
 }
 
-body {
-  background: #f9cc7f;
-  padding: 1em;
+.page {
+  overflow: hidden;
 }
 
-.page {
+.column--content {
+  float: left;
+  width: 75%;
+  margin-right: 1em;
+}
+
+.column--sidebar {
+  float: right;
+  width: calc(25% - 1em);
+}
+
+.column--content, .column--sidebar {
   background: white;
   border-radius: 8px;
+  padding: 1em;
 }
 
 * {
@@ -456,8 +467,20 @@ h1, h2, h3, h4, h5 {
   font-family: Belgrano, serif;
 }
 
+.block {
+  background: #f9cc7f;
+  border-radius: 10px;
+  padding: 1em;
+  margin-bottom: 1em;
+}
+
 header {
   text-align: center;
+}
+
+body {
+  background: white;
+  padding: 1em;
 }
 
 .site-name {
@@ -473,6 +496,7 @@ header {
 .logo {
   width: 100px;
   display: inline-block;
+  display: none;
 }
 
 .mainMenu {
@@ -491,9 +515,8 @@ header {
 }
 
 .filter {
-  position: absolute;
-  right: 1em;
-  top: 1em;
+  padding: 1em 0 2em 0;
+  float: right;
 }
 
 .recipe {
