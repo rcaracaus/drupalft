@@ -4,11 +4,13 @@ header {
 
 body {
   background:white;
-  padding: 1em;
 }
 
 .site-name {
   display: inline-block;
+		@include breakpoint(max-width $small) {
+			font-size: 2.125em;
+		}
   @include adjust-font-size-to(50px);
   @include reset-baseline;
   font-family: $font--logo;

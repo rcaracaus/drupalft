@@ -480,7 +480,6 @@ header {
 
 body {
   background: white;
-  padding: 1em;
 }
 
 .site-name {
@@ -492,6 +491,11 @@ body {
   padding: .25em .5em;
   vertical-align: top;
 }
+@media (max-width: 360px) {
+  .site-name {
+    font-size: 2.125em;
+  }
+}
 
 .logo {
   width: 100px;
@@ -499,9 +503,44 @@ body {
   display: none;
 }
 
+a.menu-link {
+  float: right;
+  display: block;
+  padding: 1em;
+}
+
+nav[role=navigation] {
+  border-top: 1px solid #808080;
+  clear: both;
+  -webkit-transition: all 0.3s ease-out;
+  -moz-transition: all 0.3s ease-out;
+  -ms-transition: all 0.3s ease-out;
+  -o-transition: all 0.3s ease-out;
+  transition: all 0.3s ease-out;
+}
+
+.js nav[role=navigation] {
+  overflow: hidden;
+  max-height: 0;
+}
+
+nav[role=navigation].active {
+  max-height: 15em;
+}
+
+nav[role=navigation] ul {
+  margin: 0;
+  padding: 0;
+}
+
+nav[role=navigation] li a {
+  display: block;
+  padding: 0.8em;
+  border-bottom: 1px solid #808080;
+}
+
 .mainMenu {
   clear: both;
-  text-align: right;
   padding: .5em;
   font-size: 1.25em;
   line-height: 1.2em;
