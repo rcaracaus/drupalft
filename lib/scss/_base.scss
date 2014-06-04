@@ -9,7 +9,7 @@ $font--logo: Chango, cursive;
 $font--header: Belgrano, serif;
 $font--body: Lato, sans-serif;
 
-$small: 360px;
+$small: 600px;
 
 .column--content, .column--sidebar {
   background: white;
@@ -30,3 +30,4 @@ a {
   cursor: pointer;
 }
 
+.node--body { clear: both; }

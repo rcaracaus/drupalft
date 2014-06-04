@@ -4,7 +4,6 @@ var dft = angular
       "ngRoute",
       "ngSanitize",
       'dft.controllers',
-      "restangular",
       "xeditable"
     ])
 
@@ -12,22 +11,10 @@ var dft = angular
 
         "$routeProvider",
         "$locationProvider",
-        "RestangularProvider",
 
-        function ($routeProvider, $locationProvider, RestangularProvider) {
+        function ($routeProvider, $locationProvider) {
 
             $locationProvider.html5Mode(true);
-
-            RestangularProvider.setDefaultHttpFields({
-                cache: true
-            });
-
-            
-            RestangularProvider.setBaseUrl('http://d8contentdev.devcloud.acquia-sites.com/');
-
-            RestangularProvider.setDefaultHeaders({ 'Accept': 'application/hal+json' });
-            
-            
 
             $routeProvider
                 .when("/", {
@@ -35,9 +22,13 @@ var dft = angular
                     routeName: "index",
                     controller: 'recipesCtrl'
                 })
-                .when('/node/:id', {
+                .when('/node/:nid', {
                     templateUrl: '/partials/node.html',
                     controller: 'nodesCtrl'
+                })
+                .when('/submit-a-recipe', {
+                    templateUrl: '/partials/submit.html',
+                    controller: 'submitCtrl'
                 })
                 // Add further routes here
             ;  
@@ -54,6 +45,13 @@ var dft = angular
 
   ;
 ;
+
+dft.config(function($httpProvider){
+    // Needed to connect to Drupal site.
+    delete $httpProvider.defaults.headers.common['X-Requested-With'];
+    // Set Accept header to hal+json to comply with Drupal GET
+    $httpProvider.defaults.headers.common['Accept'] = 'application/hal+json';
+});
 
 
 
@@ -86,101 +84,64 @@ angular.module('dft.controllers', []).
   controller('MainCtrl', function ($scope, Page) {
      $scope.Page = Page;
   }).
-  controller('nodesCtrl', function ($scope, $routeParams, $location, Restangular) {
-     Restangular.one('node', $routeParams.id).get().then(function(node){
-        $scope.node = node;
-      });
+  controller('submitCtrl', function ($scope, Page) {
+        Page.setTitle("Submit a Recipe");
   }).
-  controller('blockCtrl', function ($scope, $http) {
-
-      /*
-
-     data = { 
-      "_links":{
-        "type":{
-           "href":"http://d8-content.local/rest/type/node/page"
-         }
-       },
-     "title":[{"value":"This title should data"}]
-     }
-     
-     
-    
-     $http({
-         url: 'http://d8-2.local/node/1',
-         method: "POST",
-         data: data,
-         headers: {
-           'Content-Type':'application/hal+json',
-           'Accept':'application/hal+json'
-           }
-     }).then(function(response) {
-            // Had to hack Drupal Core to get POST response coming back.
-            // Had to hack Drupal again to get image response back.
-            $scope.node = response.data;
-            $scope.node.field_image = response.data._embedded['http://d8-.local/rest/relation/node/page/field_image'][0].uri[0].value;
-            console.log('success');
-         }, 
-         function(response) { // optional
-             // failed
-         }
-     );
-
-     */
-   
-     
-     
-     
+  controller('nodesCtrl', function ($scope, $routeParams, dftService,Page) {
+    dftService.getNode($routeParams.nid, function(data) {
+        $scope.node = data;
+        Page.setTitle($scope.node.title[0].value);
+    });
   }).
-  controller('recipesCtrl', function ($scope, $location, Restangular, Page) {
+  controller('recipesCtrl', function (dftService, $scope, Page) {
     Page.setTitle("Recipes");
 
 
-    Restangular.all('recipes').getList().then(function(recipes) {
-      $scope.recipes = recipes;
+    dftService.getRecipes(function(data) {
+        $scope.recipes = data;
 
-      var categories = [];
-      $scope.recipes.forEach(function(recipe) {
-        categories.push(recipe.term_node_tid);
-      });
-      categories = removeDuplicatesInPlace(categories);
-      $scope.categories = categories;
-      $scope.categories.unshift("all");
+        var categories = [];
+        $scope.recipes.forEach(function(recipe) {
+            categories.push(recipe.field_tags);
+        });
+        categories = removeDuplicatesInPlace(categories);
+        $scope.categories = categories;
+        $scope.categories.unshift("all");
     });
 
     $scope.selected = 0;
     $scope.select= function($index) {
-      $scope.selected = $index;
+        $scope.selected = $index;
     };
 
     $scope.sendCategory = function(category) {
-      $scope.searchTermText = category;
-      if (category == 'all') {
-        $scope.searchTermText  = ""
-      }
+        $scope.searchTermText = category;
+        if (category == 'all') {
+            $scope.searchTermText  = ""
+        }
     };
 
 
   }).
   controller('blocksCtrl', function ($scope, $http) {
-
-    $http({
-      url: 'http://d8contentdev.devcloud.acquia-sites.com/block_list/bartik/featured',
-      method: "GET",
-      headers: {
-        'Content-Type':'application/hal+json',
-        'Accept':'application/hal+json'
-      }
-    }).then(function(response) {
+    $http.get('http://d8contentdev.devcloud.acquia-sites.com/block_list/bartik/featured').then(function(response) {
         $scope.blocks = response.data;
+            console.log($scope.blocks);
       }
     );
 
   })
+;
 
 
-
-
-
-
-  ;
+// The service grabs the data from the json file.
+dft.factory('dftService', function($http) {
+    return {
+        getNode: function(nid, callback) {
+            $http.get('http://d8content-new.dev/node/' + nid).success(callback);
+        },
+        getRecipes: function(callback) {
+            $http.get('http://d8content-new.dev/recipes').success(callback);
+        }
+    }
+});

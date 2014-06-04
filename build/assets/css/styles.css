@@ -397,7 +397,6 @@ th {
 .center {
   max-width: 1200px;
   margin: auto;
-  padding: 1em;
   position: relative;
 }
 
@@ -454,8 +453,12 @@ a {
   cursor: pointer;
 }
 
+.node--body {
+  clear: both;
+}
+
 body {
-  color: #f15c25;
+  color: #444444;
   font-family: Lato, sans-serif;
 }
 
@@ -467,6 +470,11 @@ h1, h2, h3, h4, h5 {
   font-family: Belgrano, serif;
 }
 
+h1 {
+  float: left;
+  margin-top: .25em;
+}
+
 .block {
   background: #f9cc7f;
   border-radius: 10px;
@@ -476,6 +484,11 @@ h1, h2, h3, h4, h5 {
 
 header {
   text-align: center;
+  border-bottom: 1px solid #f15c25;
+  background: #f15c25;
+}
+header a {
+  color: white;
 }
 
 body {
@@ -484,66 +497,37 @@ body {
 
 .site-name {
   display: inline-block;
-  font-size: 3.125em;
-  line-height: 1.44em;
+  font-size: 1.875em;
+  line-height: 1.6em;
   line-height: 1.5em;
   font-family: Chango, cursive;
   padding: .25em .5em;
   vertical-align: top;
-}
-@media (max-width: 360px) {
-  .site-name {
-    font-size: 2.125em;
-  }
-}
-
-.logo {
-  width: 100px;
-  display: inline-block;
-  display: none;
+  color: white;
 }
 
 a.menu-link {
-  float: right;
   display: block;
+  float: right;
   padding: 1em;
 }
-
-nav[role=navigation] {
-  border-top: 1px solid #808080;
-  clear: both;
-  -webkit-transition: all 0.3s ease-out;
-  -moz-transition: all 0.3s ease-out;
-  -ms-transition: all 0.3s ease-out;
-  -o-transition: all 0.3s ease-out;
-  transition: all 0.3s ease-out;
-}
-
-.js nav[role=navigation] {
-  overflow: hidden;
-  max-height: 0;
-}
-
-nav[role=navigation].active {
-  max-height: 15em;
-}
-
-nav[role=navigation] ul {
-  margin: 0;
-  padding: 0;
-}
-
-nav[role=navigation] li a {
-  display: block;
-  padding: 0.8em;
-  border-bottom: 1px solid #808080;
+@media (min-width: 600px) {
+  a.menu-link {
+    display: none;
+  }
 }
 
 .mainMenu {
+  display: none;
   clear: both;
   padding: .5em;
   font-size: 1.25em;
   line-height: 1.2em;
+}
+@media (min-width: 600px) {
+  .mainMenu {
+    display: block;
+  }
 }
 .mainMenu a {
   text-decoration: none;
@@ -564,9 +548,19 @@ nav[role=navigation] li a {
   display: block;
   margin: 1em 0;
 }
+.recipe .recipe__title {
+  text-decoration: none;
+  font-size: 1.25em;
+  line-height: 1.2em;
+  color: #f15c25;
+  font-weight: bold;
+  font-family: Belgrano, serif;
+}
 .recipe .image {
-  width: 33%;
+  width: 20%;
+  float: left;
   height: auto;
+  margin-right: 1em;
 }
 
 .tab {

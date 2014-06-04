@@ -8,5 +8,20 @@
   clear: both;
   display: block;
   margin: 1em 0;
-  .image { width: 33%; height: auto; }
+  .recipe__title {
+    text-decoration: none;
+    @include adjust-font-size-to(20px);
+    color: $color-4;
+    font-weight: bold;
+    font-family: $font--header;
+  }
+  .recipe__body {
+
+  }
+  .image {
+    width: 20%;
+    float: left;
+    height: auto;
+    margin-right: 1em;
+  }
 }

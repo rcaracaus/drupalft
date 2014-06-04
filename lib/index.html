@@ -6,20 +6,23 @@
         <link href='http://fonts.googleapis.com/css?family=Lato:400,700|Belgrano|Chango' rel='stylesheet' type='text/css'>
     </head>
     <body class="js">
-	
-	<a href="#menu" class="menu-link">Menu</a>
-    <nav id="menu" class="mainMenu center" role="navigation" ng-include src="'/partials/main-menu.html'"></nav>
-	
-    <header class="center">
-        <img class="logo" src="/assets/images/sombrero.png" />
-        <div class="site-name">EL VEGANO LOCO</div>
+
+    <header class="branding">
+        <div class="center">
+            <div class="site-name">VEGMEX</div>
+            <a href="#menu" class="menu-link">Menu</a>
+            <nav id="menu" class="mainMenu" role="navigation" ng-include src="'/partials/main-menu.html'"></nav>
+        </div>
     </header>
 
     <div class="page center">
-        <h1>{{ Page.title() }}</h1>
-        <div class="column--content" data-ng-view>
-            <!-- Angular will load templates in here -->
+        <div class="column--content">
+            <h1>{{ Page.title() }}</h1>
+            <div data-ng-view>
+                <!-- Angular will load templates in here -->
+            </div>
         </div>
+
         <div class="column--sidebar" ng-controller="blocksCtrl">
             <div class="block" ng-repeat="block in blocks" ng-bind-html="block.body[0]['#markup']"></div>
         </div>
@@ -28,7 +31,6 @@
     <!-- TEST SCRIPTS --><!-- TEST SCRIPTS END -->
 
     <script src="//localhost:9000/livereload.js"></script>
-	<script src="lib/js/menu.js"></script>
 
     </body>
 </html>

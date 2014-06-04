@@ -6,11 +6,10 @@
         <a ng-repeat-end></a>
     </div>
     <ul>
-        <li class="recipe" ng-repeat="recipe in recipes | filter:{term_node_tid:searchTermText}">
+        <li class="recipe" ng-repeat="recipe in recipes | filter:{field_tags:searchTermText}">
             <div class="image image--right" ng-bind-html="recipe.field_recipe_image"></div>
-            <a href="/#/node/{{recipe.nid}}">{{recipe.title}}</a>
-            <div ng-bind-html="recipe.body"></div>
+            <a class="recipe__title" href="/#/node/{{recipe.nid}}">{{recipe.title}}</a>
+            <div class="recipe__body" ng-bind-html="recipe.body"></div>
         </li>
     </ul>
-
 </div>
